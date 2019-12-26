@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.talkweb.edu.index.dao.mdm.QuantitativeIndexDao">
+  <resultMap id="BaseResultMap" type="com.talkweb.edu.index.model.po.QuantitativeIndex">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="quantitative_index_id" jdbcType="BIGINT" property="quantitativeIndexId" />
+    <result column="catalog_id" jdbcType="BIGINT" property="catalogId" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="country" jdbcType="VARCHAR" property="country" />
+    <result column="quantitative_index_code" jdbcType="VARCHAR" property="quantitativeIndexCode" />
+    <result column="quantitative_index_name" jdbcType="VARCHAR" property="quantitativeIndexName" />
+    <result column="zqlx" jdbcType="VARCHAR" property="zqlx" />
+    <result column="xd" jdbcType="VARCHAR" property="xd" />
+    <result column="is_cal_index" jdbcType="INTEGER" property="isCalIndex" />
+    <result column="formula" jdbcType="VARCHAR" property="formula" />
+    <result column="formula_show" jdbcType="VARCHAR" property="formulaShow" />
+    <result column="data_source" jdbcType="INTEGER" property="dataSource" />
+    <result column="model_id" jdbcType="INTEGER" property="modelId" />
+    <result column="model_name" jdbcType="VARCHAR" property="modelName" />
+    <result column="col_name" jdbcType="VARCHAR" property="colName" />
+    <result column="col_name_zh" jdbcType="VARCHAR" property="colNameZh" />
+    <result column="is_super_modify" jdbcType="INTEGER" property="isSuperModify" />
+  </resultMap>
+
+  <resultMap id="RespResultMap" type="com.talkweb.edu.index.model.dto.resp.QuantitativeIndexResp">
+    <id column="quantitative_index_id" jdbcType="BIGINT" property="quantitativeIndexId" />
+    <result column="catalog_id" jdbcType="BIGINT" property="catalogId" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="country" jdbcType="VARCHAR" property="country" />
+    <result column="quantitative_index_code" jdbcType="VARCHAR" property="quantitativeIndexCode" />
+    <result column="quantitative_index_name" jdbcType="VARCHAR" property="quantitativeIndexName" />
+    <result column="zqlx" jdbcType="VARCHAR" property="zqlx" />
+    <result column="xd" jdbcType="VARCHAR" property="xd" />
+    <result column="is_cal_index" jdbcType="INTEGER" property="isCalIndex" />
+    <result column="formula" jdbcType="VARCHAR" property="formula" />
+    <result column="formula_show" jdbcType="VARCHAR" property="formulaShow" />
+    <result column="data_source" jdbcType="INTEGER" property="dataSource" />
+    <result column="model_id" jdbcType="INTEGER" property="modelId" />
+    <result column="model_name" jdbcType="VARCHAR" property="modelName" />
+    <result column="col_name" jdbcType="VARCHAR" property="colName" />
+    <result column="col_name_zh" jdbcType="VARCHAR" property="colNameZh" />
+    <result column="is_super_modify" jdbcType="INTEGER" property="isSuperModify" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    quantitative_index_id, catalog_id, province, city, country, quantitative_index_code,
+    quantitative_index_name, zqlx, xd, is_cal_index, formula, formula_show, data_source,
+    model_id, model_name, col_name, col_name_zh, is_super_modify
+  </sql>
+
+  <select id="selectByEntity" resultMap="RespResultMap" >
+    select
+    <include refid="Base_Column_List"/>
+    from index_quantitative_index
+    <where>
+      <if test="req.catalogId != null">
+        and catalog_id in
+        <foreach collection="req.catalogId" item="item" open="(" separator="," close=")">
+          ${item}
+        </foreach>
+      </if>
+      <if test="req.province != null and req.province!=''">
+        and province = #{req.province,jdbcType=VARCHAR}
+      </if>
+      <if test="req.city != null and req.city!=''">
+        and city = #{req.city,jdbcType=VARCHAR}
+      </if>
+      <if test="req.country != null and req.country!=''">
+        and country = #{req.country,jdbcType=VARCHAR}
+      </if>
+      <if test="req.zqlx != null">
+        and
+        <foreach collection="req.zqlx" item="zqlx" open="(" separator="or" close=")">
+          FIND_IN_SET(#{zqlx},zqlx)
+        </foreach>
+      </if>
+      <if test="req.xd != null">
+        and
+        <foreach collection="req.xd" item="xd" open="(" separator="or" close=")">
+          FIND_IN_SET(#{xd},xd)
+        </foreach>
+      </if>
+      <!--<if test="req.colNameZh != null and req.colNameZh!=''">
+        and col_name_zh like concat('%' , #{req.colNameZh,jdbcType=VARCHAR} , '%')
+      </if>-->
+      <if test="req.quantitativeIndexName != null and req.quantitativeIndexName!=''">
+        and quantitative_index_name like concat('%',#{req.quantitativeIndexName,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="req.isCalIndex != null ">
+        and is_cal_index = #{req.isCalIndex,jdbcType=INTEGER}
+      </if>
+
+    </where>
+  </select>
+
+  <select id="selectById" resultMap="RespResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from index_quantitative_index
+    where quantitative_index_id = #{id,jdbcType=BIGINT}
+  </select>
+
+
+</mapper>

@@ -1,4 +1,4 @@
-package com.zmm.commonutils.utils;
+package com.zmm.commonutils.utils.encry;
 
 import java.io.ByteArrayOutputStream;
 

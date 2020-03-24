@@ -1,11 +1,11 @@
-package com.zmm.commonutils.entity;
+package com.zmm.commonutils.exception;
 
 /**
  * 参数错误异常类
  *
  * @author lzy
  */
-public class ParamException extends RuntimeException {
+public class BaseRuntimeException extends RuntimeException {
 
     /**
      *
@@ -32,7 +32,7 @@ public class ParamException extends RuntimeException {
      *
      * @param message String
      */
-    public ParamException(String message)
+    public BaseRuntimeException(String message)
     {
         super(message);
     }
@@ -44,7 +44,7 @@ public class ParamException extends RuntimeException {
      * @param paraName 参数名称
      * @param paraName 详细描述信息
      */
-    public ParamException(String code, String message, String paraName)
+    public BaseRuntimeException(String code, String message, String paraName)
     {
         this(message);
         this.code = code;
@@ -58,11 +58,12 @@ public class ParamException extends RuntimeException {
      * @param code 错误码
      * @param message 参数名称
      */
-    public ParamException(String code, String message)
+    public BaseRuntimeException(String code, String message)
     {
         this(code, message, "");
     }
 
+    @Override
     public String getMessage()
     {
         return message;

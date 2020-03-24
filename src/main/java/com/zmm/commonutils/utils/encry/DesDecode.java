@@ -1,4 +1,4 @@
-package com.zmm.commonutils.utils;
+package com.zmm.commonutils.utils.encry;
 
 import javax.crypto.Cipher;
 import javax.crypto.SecretKeyFactory;

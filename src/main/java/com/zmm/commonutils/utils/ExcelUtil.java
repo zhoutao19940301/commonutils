@@ -1,6 +1,6 @@
 package com.zmm.commonutils.utils;
 
-import com.zmm.commonutils.entity.ParamException;
+import com.zmm.commonutils.exception.BaseRuntimeException;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -107,7 +107,7 @@ public class ExcelUtil {
 
     public static List<List<String>> uploadExcel(MultipartFile file, HttpServletRequest request){
         if (file.isEmpty()) {
-            throw new ParamException("400","文件为空！");
+            throw new BaseRuntimeException("400","文件为空！");
         }
         List<List<String>> excelData = null;
         try {

@@ -1,9 +1,6 @@
 package com.zmm.commonutils.test;
 
-import com.zmm.commonutils.service.SysZdsjService;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.annotation.Resource;
 
 /**
  * @Descriprion: TODO
@@ -13,10 +10,8 @@ import javax.annotation.Resource;
 @RestController
 public class Test {
 
-    @Resource
-    private SysZdsjService sysZdsjService;
-
     public void aa(){
+        System.out.println("1");
     }
 
 }

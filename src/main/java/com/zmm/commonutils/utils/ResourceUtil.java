@@ -5,6 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.support.ResourceBundleMessageSource;
 
 import java.util.Locale;
+import java.util.UUID;
 
 /**
  * 国际化资源文件工具类
@@ -138,5 +139,9 @@ public class ResourceUtil extends ResourceBundleMessageSource
     public static Locale getDefaultLocale()
     {
         return defaultLocale;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(UUID.randomUUID().toString().replaceAll("-",""));
     }
 }
